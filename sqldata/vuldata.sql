@@ -1,0 +1,50 @@
+SET @PREVIOUS_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS;
+SET FOREIGN_KEY_CHECKS = 0;
+
+CREATE TABLE `admin` (
+  `admin_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `admin_name` varchar(255) NOT NULL DEFAULT '',
+  `admin_pass` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`admin_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `comment` (
+  `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) NOT NULL,
+  `comment_text` varchar(255) NOT NULL DEFAULT '',
+  `pub_date` date NOT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(255) NOT NULL DEFAULT '',
+  `user_pass` varchar(255) NOT NULL DEFAULT '',
+  `user_avatar` varchar(255) NOT NULL DEFAULT '',
+  `join_date` date NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = @PREVIOUS_FOREIGN_KEY_CHECKS;
+
+SET @PREVIOUS_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS;
+SET FOREIGN_KEY_CHECKS = 0;
+
+LOCK TABLES `admin` WRITE;
+ALTER TABLE `admin` DISABLE KEYS;
+INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_pass`) VALUES 
+	(1,'admin','d033e22ae348aeb5660fc2140aec35850c4da997');
+ALTER TABLE `admin` ENABLE KEYS;
+UNLOCK TABLES;
+
+LOCK TABLES `comment` WRITE;
+ALTER TABLE `comment` DISABLE KEYS;
+ALTER TABLE `comment` ENABLE KEYS;
+UNLOCK TABLES;
+
+LOCK TABLES `users` WRITE;
+ALTER TABLE `users` DISABLE KEYS;
+ALTER TABLE `users` ENABLE KEYS;
+UNLOCK TABLES;
+
+SET FOREIGN_KEY_CHECKS = @PREVIOUS_FOREIGN_KEY_CHECKS;
